@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="card.css" type="text/css">
+  <!-- <link rel="stylesheet" href="card.css" type="text/css"> -->
   <title>Document</title>
   <style>
     .movie-card-list {
@@ -24,6 +24,7 @@
     .main {
       background-color: black;
       color: white;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -37,17 +38,14 @@
   <div class="main">
     <h1>영화검색</h1>
     <div id="검색부분">
-      <input id="search-bar" type="text"><button id="search">검색</button>
+      <input id="search-bar" type="text">
     </div>
     <button id="bookmark-view">북마크보기</button>
   </div>
 
-
-
   <!-- 처음에는 영화정보를 받아와서 카드를 출력하고,검색창에 값이 입력되면 필터링 해서 출력 -->
   <!-- 여기다가 검색한 결과 반복문으로 카드하나씩 붙혀넣기 -->
   <div class="movie-card-list" id="카드출력부분">
-
     <!--(card)카드하나의 요소 css로 만들기...-->
     <div class="movie-card">
       <div class="카드안에서 카드틀 모양을 잡기 위한 div">
