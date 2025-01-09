@@ -7,7 +7,7 @@
   <!-- <link rel="stylesheet" href="card.css" type="text/css"> -->
   <title>Document</title>
   <style>
-    .movie-card-list {
+    #movie-card-list {
       background-color: green;
     }
 
@@ -24,12 +24,21 @@
     .main {
       background-color: black;
       color: white;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 2rem
+    }
+
+
+
+    #prev-page-btn {
+      display: none;
+    }
+
+    #next-page-btn {
+      display: block;
     }
   </style>
 </head>
@@ -42,10 +51,9 @@
     </div>
     <button id="bookmark-view">북마크보기</button>
   </div>
-
   <!-- 처음에는 영화정보를 받아와서 카드를 출력하고,검색창에 값이 입력되면 필터링 해서 출력 -->
   <!-- 여기다가 검색한 결과 반복문으로 카드하나씩 붙혀넣기 -->
-  <div class="movie-card-list" id="카드출력부분">
+  <div id="movie-card-list" class="">
     <!--(card)카드하나의 요소 css로 만들기...-->
     <div class="movie-card">
       <div class="카드안에서 카드틀 모양을 잡기 위한 div">
@@ -57,6 +65,15 @@
       </div>
     </div>
     <!--(card)카드하나의 요소 css로 만들기...-->
+  </div>
+  <div class="페이지버튼">
+
+
+    <button id="prev-page-btn">이전페이지</button>
+    <span id="page-number">1</span>
+    <button id="next-page-btn">다음페이지</button>
+    마지막페이지 :
+    <span id="Last-page-number"></span>
   </div>
   <script src="index.js"></script>
 </body>
