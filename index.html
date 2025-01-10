@@ -38,6 +38,26 @@
     #next-page-btn {
       display: block;
     }
+
+
+    .cardinfo {
+      display: none;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .modal {
+      background-color: beige;
+      width: 50rem;
+      height: 50rem;
+    }
+
+    .modal-image {
+      width: 20rem;
+      height: 20rem;
+    }
   </style>
 </head>
 
@@ -51,7 +71,14 @@
   </div>
   <!-- 처음에는 영화정보를 받아와서 카드를 출력하고,검색창에 값이 입력되면 필터링 해서 출력 -->
   <!-- 여기다가 검색한 결과 반복문으로 카드하나씩 붙혀넣기 -->
-  <div id="movie-card-list" class="">
+
+
+  <div class="modal hide">
+  </div>
+
+
+
+  <div id="movie-card-list">
     <!--(card)카드하나의 요소 css로 만들기...-->
     <div class="movie-card" onclick="printCardList()">
       <div class="카드안에서 카드틀 모양을 잡기 위한 div">

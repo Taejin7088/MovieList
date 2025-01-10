@@ -1,23 +1,13 @@
 const searchBar = document.getElementById("search-bar")
-
-const movieCards = document.getElementById("movie-card")
+const movieCard = document.querySelector(".movie-card")
 const movieCardList = document.getElementById("movie-card-list")
-
-
 const prevPageBtn = document.getElementById("prev-page-btn")
 const nextPageBtn = document.getElementById("next-page-btn")
 const lastPageNumber = document.getElementById("Last-page-number")
 const PageNumber = document.getElementById("page-number");
 
 
-//처음페이지를 로딩할때 인기영화 20개 받아오는 부분
 //출력해야할 요소, 이미지, 제목, 평점, 장르는 쉽게 표현할수 있을 것 같은데 이건 나중에 해보자
-
-//api링크와 api키 선언하는 부분
-//출력부분은 비슷하니까 함수로 만들어서 사용해도 될 거 같음
-function test(text) {
-  console.log(text);
-}
 let evenTest = 0;
 const printCardList = function () {
   evenTest++;
@@ -39,7 +29,7 @@ const printCardList = function () {
   };
   let cardListHtml = ``;
 
-  //json데이터로 페이지 띄우니까 awiat필요
+
   fetch(apiUrl, apiOptions)
     .then((res) => {
       return res.json()
@@ -52,13 +42,18 @@ const printCardList = function () {
         const posterPath = `https://www.themoviedb.org/t/p/w1280${data.poster_path}`
         const title = data.title;
         const rating = data.vote_average;
+        const overview = data.overview;
+        const date = data.release_date
+        const id = data.id
         const makeCard = `
-        <div class="movie-card"  onclick="">
-        <div class="카드안에서 카드틀 모양을 잡기 위한div">
+        <div class="movie-card" onclick="printModal(${id})">
+        <div class="카드틀div" id ="${id}">
           <img src="${posterPath}" class="movie-card-image" alt="영화포스터">
           <div class="movie-card-body">
             <h5 class="movie-card-title">${title}</h5>
             <p class="movie-card-rating">평점:${rating}</p>
+            <p class="movie-card-overview cardinfo">${overview}</p>
+            <p class="movie-card-date cardinfo">${date}</p>
           </div>
         </div>
       </div>`
@@ -71,22 +66,47 @@ const printCardList = function () {
 }
 printCardList()
 
+//모달창띄우기
+const printModal = (id) => {
+  document.querySelector(".modal").classList.remove('hide')
+  const card = document.getElementById(id)
+  const modalTitle = card.querySelector('.movie-card-title').innerHTML
+  const modalImg = card.querySelector('.movie-card-image').src
+  const modalLating = card.querySelector('.movie-card-rating').innerHTML
+  const modaloverview = card.querySelector('.movie-card-overview').innerHTML
+  const modaldate = card.querySelector('.movie-card-date').innerHTML
+  const makeModal = `
+    <div class="modal-content">
+      <h2 class ="모달제목">${modalTitle}</h2>
+      <div class ="모달영화내용">${modaloverview}</div>
+      <img src="${modalImg}" class="modal-image" alt="영화포스터">
+      <p class="modal-rating">평점:${modalLating}</p>
+      <p class="modal-date">${modaldate}</p>
+      <button onclick="closeModal()">닫기</button>
+    </div>
+  </div>`
+  document.querySelector(".modal").innerHTML = makeModal
+}
 
 
+const closeModal = () => {
+  document.querySelector(".modal").classList.add('hide')
+}
+
+
+
+//페이지 기능관련 함수들
 function printTotalPageAndPageBtn(total_pages) {
   lastPageNumber.innerHTML = total_pages;
   (PageNumber.innerHTML == total_pages) ? nextPageBtn.style.display = "none" : nextPageBtn.style.display = "block";
   (PageNumber.innerHTML == 1) ? prevPageBtn.style.display = "none" : prevPageBtn.style.display = "block";
 }
-
-
 //이전페이지버튼
 prevPageBtn.addEventListener("click", function () {
   if (Number(PageNumber.innerHTML) == 1) return;
   PageNumber.innerHTML = Number(PageNumber.innerHTML) - 1
   printCardList()
 })
-
 //다음페이지버튼
 nextPageBtn.addEventListener("click", function () {
   PageNumber.innerHTML = Number(PageNumber.innerHTML) + 1
