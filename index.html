@@ -31,8 +31,6 @@
       padding: 2rem
     }
 
-
-
     #prev-page-btn {
       display: none;
     }
@@ -55,7 +53,7 @@
   <!-- 여기다가 검색한 결과 반복문으로 카드하나씩 붙혀넣기 -->
   <div id="movie-card-list" class="">
     <!--(card)카드하나의 요소 css로 만들기...-->
-    <div class="movie-card">
+    <div class="movie-card" onclick="printCardList()">
       <div class="카드안에서 카드틀 모양을 잡기 위한 div">
         <img src="" class="movie-card-image" alt="영화포스터">
         <div class="movie-card-body">
@@ -67,8 +65,6 @@
     <!--(card)카드하나의 요소 css로 만들기...-->
   </div>
   <div class="페이지버튼">
-
-
     <button id="prev-page-btn">이전페이지</button>
     <span id="page-number">1</span>
     <button id="next-page-btn">다음페이지</button>

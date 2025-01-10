@@ -1,12 +1,13 @@
+const searchBar = document.getElementById("search-bar")
 
-
-const searchBar = document.querySelector("#search-bar")
+const movieCards = document.getElementById("movie-card")
 const movieCardList = document.getElementById("movie-card-list")
+
+
 const prevPageBtn = document.getElementById("prev-page-btn")
 const nextPageBtn = document.getElementById("next-page-btn")
 const lastPageNumber = document.getElementById("Last-page-number")
-const htmlPage = document.getElementById("page-number");
-let page = document.getElementById("page-number").innerHTML
+const PageNumber = document.getElementById("page-number");
 
 
 //처음페이지를 로딩할때 인기영화 20개 받아오는 부분
@@ -14,17 +15,20 @@ let page = document.getElementById("page-number").innerHTML
 
 //api링크와 api키 선언하는 부분
 //출력부분은 비슷하니까 함수로 만들어서 사용해도 될 거 같음
+function test(text) {
+  console.log(text);
+}
 let evenTest = 0;
-const printCardList = async function () {
+const printCardList = function () {
   evenTest++;
   console.log(evenTest)
   let apiUrl = ""
   if (searchBar.value == "") {
-    apiUrl = `https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=${page}`;
+    apiUrl = `https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=${PageNumber.innerHTML}`;
 
   } else {
     let searchText = searchBar.value
-    apiUrl = `https://api.themoviedb.org/3/search/movie?query=${searchText}&include_adult=false&language=ko-KR&page=${page}`;
+    apiUrl = `https://api.themoviedb.org/3/search/movie?query=${searchText}&include_adult=false&language=ko-KR&page=${PageNumber.innerHTML}`;
   }
   const apiOptions = {
     method: 'GET',
@@ -36,12 +40,12 @@ const printCardList = async function () {
   let cardListHtml = ``;
 
   //json데이터로 페이지 띄우니까 awiat필요
-  await fetch(apiUrl, apiOptions)
+  fetch(apiUrl, apiOptions)
     .then((res) => {
       return res.json()
     })
     .then((json) => {
-      lastPageNumber.innerHTML = json.total_pages
+      printTotalPageAndPageBtn(json.total_pages)
       const apiDataList = json.results
       apiDataList.forEach(data => {
         //출력해야할 요소, 이미지, 제목, 평점
@@ -49,7 +53,7 @@ const printCardList = async function () {
         const title = data.title;
         const rating = data.vote_average;
         const makeCard = `
-        <div class="movie-card">
+        <div class="movie-card"  onclick="">
         <div class="카드안에서 카드틀 모양을 잡기 위한div">
           <img src="${posterPath}" class="movie-card-image" alt="영화포스터">
           <div class="movie-card-body">
@@ -58,33 +62,39 @@ const printCardList = async function () {
           </div>
         </div>
       </div>`
-
         //페이지버튼표시버튼
         cardListHtml += makeCard
-        movieCardList.innerHTML = cardListHtml
       });
+      movieCardList.innerHTML = cardListHtml
     })
     .catch(err => console.error(err));
-  document.getElementById("page-number").innerHTML = page;
-  (page == lastPageNumber.innerHTML) ? nextPageBtn.style.display = "none" : nextPageBtn.style.display = "block";
-  (page == 1) ? prevPageBtn.style.display = "none" : prevPageBtn.style.display = "block";
 }
 printCardList()
 
+
+
+function printTotalPageAndPageBtn(total_pages) {
+  lastPageNumber.innerHTML = total_pages;
+  (PageNumber.innerHTML == total_pages) ? nextPageBtn.style.display = "none" : nextPageBtn.style.display = "block";
+  (PageNumber.innerHTML == 1) ? prevPageBtn.style.display = "none" : prevPageBtn.style.display = "block";
+}
+
+
 //이전페이지버튼
 prevPageBtn.addEventListener("click", function () {
-  if (Number(page) == 1) return;
-  page = Number(page) - 1
+  if (Number(PageNumber.innerHTML) == 1) return;
+  PageNumber.innerHTML = Number(PageNumber.innerHTML) - 1
   printCardList()
 })
 
 //다음페이지버튼
 nextPageBtn.addEventListener("click", function () {
-  page = Number(page) + 1
+  PageNumber.innerHTML = Number(PageNumber.innerHTML) + 1
   printCardList()
 })
 
 //검색창에 입력값 들어오면 
 searchBar.addEventListener("input", function () {
+  PageNumber.innerHTML = 1
   printCardList()
 })
