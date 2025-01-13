@@ -5,8 +5,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <link rel="stylesheet" href="card.css" type="text/css"> -->
+
   <title>Document</title>
   <style>
+    * {
+      margin: 0;
+      /* 모든 요소의 기본 바깥 여백(margin)을 제거 */
+      padding: 0;
+      /* 모든 요소의 기본 안쪽 여백(padding)을 제거 */
+      box-sizing: border-box;
+      /* 요소의 너비/높이를 계산할 때, padding과 border를 포함 */
+    }
+
+    html,
+    body {
+      width: 100%;
+      /* 페이지의 너비를 화면 전체로 설정 */
+      height: 100%;
+      /* 페이지의 높이를 화면 전체로 설정 */
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      /* 페이지의 기본 글꼴을 Arial 또는 sans-serif로 설정 */
+      line-height: 1.6;
+      /* 텍스트의 줄 간격을 1.6으로 설정하여 가독성 향상 */
+    }
+
+    img {
+      max-width: 100%;
+      /* 이미지를 부모 요소의 너비를 초과하지 않도록 설정 */
+      display: block;
+      /* 이미지 하단에 생기는 공백 제거 (inline -> block) */
+    }
+
+    a {
+      text-decoration: none;
+      /* 링크의 밑줄을 제거 */
+      color: inherit;
+      /* 부모 요소의 글자 색상(color)을 상속 */
+    }
+
+    ul,
+    ol {
+      list-style: none;
+      /* 리스트의 기본 번호나 점(bullet)을 제거 */
+    }
+
+    button {
+      all: unset;
+      /* 버튼의 모든 기본 스타일을 제거 */
+      cursor: pointer;
+      /* 버튼을 클릭 가능한 상태로 변경 */
+    }
+
+
+
+
     #movie-card-list {
       background-color: green;
     }
@@ -58,11 +113,15 @@
       width: 20rem;
       height: 20rem;
     }
+
+    .movie-card {
+      margin: 5px auto 5px auto
+    }
   </style>
 </head>
 
 <body>
-  <div class="main">
+  <div class="main" onclick="closeModal()">
     <h1>영화검색</h1>
     <div id="검색부분">
       <input id="search-bar" type="text">

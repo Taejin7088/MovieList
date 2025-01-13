@@ -9,7 +9,7 @@ const PageNumber = document.getElementById("page-number");
 
 //출력해야할 요소, 이미지, 제목, 평점, 장르는 쉽게 표현할수 있을 것 같은데 이건 나중에 해보자
 let evenTest = 0;
-const printCardList = function () {
+const printCardList = async function () {
   evenTest++;
   console.log(evenTest)
   let apiUrl = ""
@@ -30,39 +30,39 @@ const printCardList = function () {
   let cardListHtml = ``;
 
 
-  fetch(apiUrl, apiOptions)
-    .then((res) => {
-      return res.json()
-    })
-    .then((json) => {
-      printTotalPageAndPageBtn(json.total_pages)
-      const apiDataList = json.results
-      apiDataList.forEach(data => {
-        //출력해야할 요소, 이미지, 제목, 평점
-        const posterPath = `https://www.themoviedb.org/t/p/w1280${data.poster_path}`
-        const title = data.title;
-        const rating = data.vote_average;
-        const overview = data.overview;
-        const date = data.release_date
-        const id = data.id
-        const makeCard = `
-        <div class="movie-card" onclick="printModal(${id})">
-        <div class="카드틀div" id ="${id}">
-          <img src="${posterPath}" class="movie-card-image" alt="영화포스터">
-          <div class="movie-card-body">
-            <h5 class="movie-card-title">${title}</h5>
-            <p class="movie-card-rating">평점:${rating}</p>
-            <p class="movie-card-overview cardinfo">${overview}</p>
-            <p class="movie-card-date cardinfo">${date}</p>
+  try {
+    const res = await fetch(apiUrl, apiOptions)
+    const json = await res.json()
+    printTotalPageAndPageBtn(json.total_pages)
+    const apiDataList = json.results
+    apiDataList.forEach(data => {
+      //출력해야할 요소, 이미지, 제목, 평점
+      const posterPath = `https://www.themoviedb.org/t/p/w1280${data.poster_path}`
+      const title = data.title;
+      const rating = data.vote_average;
+      const overview = data.overview;
+      const date = data.release_date
+      const id = data.id
+      const makeCard = `
+          <div class="movie-card" onclick="printModal(${id})">
+          <div class="카드틀div" id ="${id}">
+            <img src="${posterPath}" class="movie-card-image" alt="영화포스터">
+            <div class="movie-card-body">
+              <h5 class="movie-card-title">${title}</h5>
+              <p class="movie-card-rating">평점:${rating}</p>
+              <p class="movie-card-overview cardinfo">${overview}</p>
+              <p class="movie-card-date cardinfo">${date}</p>
+            </div>
           </div>
-        </div>
-      </div>`
-        //페이지버튼표시버튼
-        cardListHtml += makeCard
-      });
-      movieCardList.innerHTML = cardListHtml
-    })
-    .catch(err => console.error(err));
+        </div>`
+      //페이지버튼표시버튼
+      cardListHtml += makeCard
+    });
+    movieCardList.innerHTML = cardListHtml
+  } catch (err) {
+    console.log(err)
+  }
+
 }
 printCardList()
 
@@ -88,11 +88,9 @@ const printModal = (id) => {
   document.querySelector(".modal").innerHTML = makeModal
 }
 
-
 const closeModal = () => {
   document.querySelector(".modal").classList.add('hide')
 }
-
 
 
 //페이지 기능관련 함수들
@@ -114,7 +112,13 @@ nextPageBtn.addEventListener("click", function () {
 })
 
 //검색창에 입력값 들어오면 
+let timeOut = ""  //setTimeOut을 없애기 위한 변수
 searchBar.addEventListener("input", function () {
   PageNumber.innerHTML = 1
-  printCardList()
+  clearTimeout(timeOut)
+  timeOut = setTimeout(() => {
+    console.log("검색확인")
+    printCardList()
+  }, 300);
+
 })
