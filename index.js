@@ -35,6 +35,7 @@ const printCardList = async function (test) {
     const res = await fetch(apiUrl, apiOptions)
     const json = await res.json()
     const apiDataList = json.results
+    printPageBtn()
     lastPageNumber.innerHTML = json.total_pages
     apiDataList.forEach(data => {
       //출력해야할 요소, 이미지, 제목, 평점
@@ -65,15 +66,22 @@ const printCardList = async function (test) {
 }
 printCardList("테스트테스트")
 
-//모달창띄우기
-const printModal = (id) => {
+//북마크 로컬스토리지에 저장 받아오기,
+// 키값을 아이디값으로,
+// 벨류값을 내용으로 
+// 모달창 띄우는거랑 똑같이 값 받아와서 저정하면 될듯요
+// 키값은 > 아이디값
+
+const createHtmlById = (id) => {
+  //아이디값으로 html을 만들어줌
+  //모달창 또는 북마크 만들때 여길호출해서 쓰면될듯
   const card = document.getElementById(id)
   const modalTitle = card.querySelector('.movie-card-title').innerHTML
   const modalImg = card.querySelector('.movie-card-image').src
   const modalLating = card.querySelector('.movie-card-rating').innerHTML
   const modaloverview = card.querySelector('.movie-card-overview').innerHTML
   const modaldate = card.querySelector('.movie-card-date').innerHTML
-  const makeModal = `
+  const htmlContent = `
     <div class="modal-content">
       <h2 class ="모달제목">${modalTitle}</h2>
       <div class ="modal-overview">${modaloverview}</div>
@@ -83,7 +91,13 @@ const printModal = (id) => {
       <button onclick="closeModal()">닫기</button>
     </div>
   </div>`
-  document.querySelector(".modal").innerHTML = makeModal
+  return htmlContent;
+}
+
+//모달창띄우기
+const printModal = (id) => {
+  const htmlContent = createHtmlById(id)
+  document.querySelector(".modal").innerHTML = htmlContent;
   document.querySelector(".modal").classList.remove('hide')
 }
 
@@ -104,19 +118,13 @@ function setPageNumber(pageDirection) {
       PageNumber.innerHTML = Number(PageNumber.innerHTML) - 1
       break;
   }
-  if (pageDirection === "NEXT") {
-
-  } else if (pageDirection === "PREV") {
-
-  }
 }
 
 //페이지버튼표시:API데이터의 total_pages를 기준으로 표시됨
 function printPageBtn() {
-  (PageNumber.innerHTML == total_pages) ? nextPageBtn.style.display = "none" : nextPageBtn.style.display = "block";
+  (PageNumber.innerHTML == lastPageNumber) ? nextPageBtn.style.display = "none" : nextPageBtn.style.display = "block";
   (PageNumber.innerHTML == 1) ? prevPageBtn.style.display = "none" : prevPageBtn.style.display = "block";
 }
-
 
 
 //이전페이지버튼
@@ -140,3 +148,4 @@ searchBar.addEventListener("input", function () {
     PageNumber.innerHTML = 1
   }, 300);
 })
+
