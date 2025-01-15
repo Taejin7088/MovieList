@@ -1,0 +1,46 @@
+#movie-card-list {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background-color: #000;
+}
+
+.movie-card {
+  margin: 2rem auto 2rem auto;
+  width: 12rem;
+  height: 25rem;
+  background-color: black;
+  transition: 0.2s;
+}
+
+.movie-card:hover {
+  cursor: pointer;
+  transform: translateY(-0.7rem);
+}
+
+.movie-card-image {
+  width: 100%;
+  height: 60%;
+  border-radius: 15px;
+}
+
+
+.movie-card-title {
+  margin-top: 10px;
+  font-size: large;
+  color: #fff;
+  height: 20%;
+  width: 100%;
+}
+
+.movie-card-rating {
+  color: yellow;
+  margin: auto 0px 5px 0px 0px;
+  text-align: left;
+}
+
+.cardinfo {
+  display: none;
+}

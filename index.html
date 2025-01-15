@@ -8,155 +8,78 @@
 
   <title>Document</title>
   <style>
+    /* html기본스타일 초기화 css */
     * {
       margin: 0;
-      /* 모든 요소의 기본 바깥 여백(margin)을 제거 */
       padding: 0;
-      /* 모든 요소의 기본 안쪽 여백(padding)을 제거 */
       box-sizing: border-box;
-      /* 요소의 너비/높이를 계산할 때, padding과 border를 포함 */
     }
 
     html,
     body {
       width: 100%;
-      /* 페이지의 너비를 화면 전체로 설정 */
       height: 100%;
-      /* 페이지의 높이를 화면 전체로 설정 */
+      background-color: #000;
     }
 
     body {
       font-family: Arial, sans-serif;
-      /* 페이지의 기본 글꼴을 Arial 또는 sans-serif로 설정 */
       line-height: 1.6;
-      /* 텍스트의 줄 간격을 1.6으로 설정하여 가독성 향상 */
     }
 
     img {
       max-width: 100%;
-      /* 이미지를 부모 요소의 너비를 초과하지 않도록 설정 */
       display: block;
-      /* 이미지 하단에 생기는 공백 제거 (inline -> block) */
     }
 
     a {
       text-decoration: none;
-      /* 링크의 밑줄을 제거 */
       color: inherit;
-      /* 부모 요소의 글자 색상(color)을 상속 */
     }
 
     ul,
     ol {
       list-style: none;
-      /* 리스트의 기본 번호나 점(bullet)을 제거 */
     }
 
     button {
       all: unset;
-      /* 버튼의 모든 기본 스타일을 제거 */
       cursor: pointer;
-      /* 버튼을 클릭 가능한 상태로 변경 */
-    }
-
-
-
-
-    #movie-card-list {
-      background-color: green;
-    }
-
-    .movie-card {
-      background-color: white;
-      width: 10rem;
-    }
-
-    .movie-card-image {
-      width: 10rem;
-      height: 10rem;
-    }
-
-    .main {
-      background-color: black;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem
-    }
-
-    #prev-page-btn {
-      display: none;
-    }
-
-    #next-page-btn {
-      display: block;
-    }
-
-
-    .cardinfo {
-      display: none;
-    }
-
-    .hide {
-      display: none;
-    }
-
-    .modal {
-      background-color: beige;
-      width: 50rem;
-      height: 50rem;
-    }
-
-    .modal-image {
-      width: 20rem;
-      height: 20rem;
-    }
-
-    .movie-card {
-      margin: 5px auto 5px auto
     }
   </style>
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="modal.css">
+  <link rel="stylesheet" href="movielist.css">
 </head>
 
 <body>
-  <div class="main" onclick="closeModal()">
-    <h1>영화검색</h1>
-    <div id="검색부분">
-      <input id="search-bar" type="text">
+  <nav class="nav" onclick="closeModal()">
+    <div id="search-area">
+      <input id="search-bar" type="text" placeholder="영화검색">
     </div>
     <button id="bookmark-view">북마크보기</button>
-  </div>
-  <!-- 처음에는 영화정보를 받아와서 카드를 출력하고,검색창에 값이 입력되면 필터링 해서 출력 -->
-  <!-- 여기다가 검색한 결과 반복문으로 카드하나씩 붙혀넣기 -->
-
+    <div class="pagination">
+      <button id="prev-page-btn"><!-- 이전페이지버튼 -->
+        <div>&lt;<!-- "<" --></div>
+      </button>
+      <span id="page-number">1</span><!-- 현재페이지표시 -->
+      <button id="next-page-btn"><!-- 다음페이지버튼 -->
+        <div>&gt;<!-- ">" --></div>
+      </button>
+      마지막페이지 :
+      <span id="Last-page-number"></span><!-- 마지막페이지표시 -->
+    </div>
+  </nav>
 
   <div class="modal hide">
+    <!-- 모달창이 입력되는 부분 -->
   </div>
 
 
 
-  <div id="movie-card-list">
-    <!--(card)카드하나의 요소 css로 만들기...-->
-    <div class="movie-card" onclick="printCardList()">
-      <div class="카드안에서 카드틀 모양을 잡기 위한 div">
-        <img src="" class="movie-card-image" alt="영화포스터">
-        <div class="movie-card-body">
-          <h5 class="movie-card-title">제목</h5>
-          <p class="movie-card-rating">평점</p>
-        </div>
-      </div>
-    </div>
-    <!--(card)카드하나의 요소 css로 만들기...-->
-  </div>
-  <div class="페이지버튼">
-    <button id="prev-page-btn">이전페이지</button>
-    <span id="page-number">1</span>
-    <button id="next-page-btn">다음페이지</button>
-    마지막페이지 :
-    <span id="Last-page-number"></span>
-  </div>
+  <section id="movie-card-list">
+    <!-- 영화카드가 입력되는 부분 -->
+  </section>
   <script src="index.js"></script>
 </body>
 
