@@ -1,5 +1,5 @@
 #movie-card-list {
-  margin-top: 80px;
+  margin-top: 140px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;

@@ -54,10 +54,12 @@
 
 <body>
   <nav class="nav" onclick="closeModal()">
+    <button id="home-btn" onclick="goHome()">홈</button>
     <div id="search-area">
       <input id="search-bar" type="text" placeholder="영화검색">
     </div>
-    <button id="bookmark-view">북마크보기</button>
+    <button id="bookmark-view" onclick="printBookmarkList()">북마크보기</button>
+    <div id="text-description">추천영화</div>
     <div class="pagination">
       <button id="prev-page-btn"><!-- 이전페이지버튼 -->
         <div>&lt;<!-- "<" --></div>
