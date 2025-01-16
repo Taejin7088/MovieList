@@ -6,12 +6,6 @@ const prevPageBtn = document.getElementById("prev-page-btn")
 const nextPageBtn = document.getElementById("next-page-btn")
 
 
-
-
-////페이지기능
-//페이지버튼표시
-//prevPageBtn.style.display = ("none","block") 이전 페이지버튼 표시 지정
-//nextPageBtn.style.display = ("none","block") 다음 페이지버튼 표시 지정
 //이전페이지버튼
 prevPageBtn.addEventListener("click", function () {
   setPageNumber("PREV")
@@ -26,6 +20,10 @@ nextPageBtn.addEventListener("click", function () {
   printMovieList(actionType)
 })
 
+////페이지기능
+//페이지버튼표시
+//prevPageBtn.style.display = ("none","block") 이전 페이지버튼 표시 지정
+//nextPageBtn.style.display = ("none","block") 다음 페이지버튼 표시 지정
 export function setPageBtn(settingOption) {
   (PageNumber.innerHTML == lastPageNumber.innerHTML) ? nextPageBtn.style.display = "none" : nextPageBtn.style.display = "block";
   (PageNumber.innerHTML == 1) ? prevPageBtn.style.display = "none" : prevPageBtn.style.display = "block";

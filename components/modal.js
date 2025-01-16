@@ -9,7 +9,6 @@ const modalContent = {
   bookmarkBtn: document.getElementById("bookmark-btn"),
 }
 
-
 ////모달
 //모달띄우기
 export const printModal = (id) => {

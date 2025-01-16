@@ -1,8 +1,8 @@
 import { setPageNumber, setPageBtn } from "./pagination.js";
 import { printMovieCardByid } from "../api/apiPrint.js"
 import { setHtmlTitle } from "../index.js"
-////북마크
-//북마크: 로컬스토리지에 key값=(영화id) value값=(0고정) 으로저장됨, 북마크 기능 키값만 사용 
+
+//북마크 : 로컬스토리지에 key값=(영화id) value값=(0고정) 으로저장됨, 북마크 기능 키값만 사용 
 //북마크추가
 export const addBookmark = (id) => {
   localStorage.setItem(id, 0);
