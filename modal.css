@@ -14,6 +14,7 @@
 }
 
 .modal-content {
+  position: relative;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -27,17 +28,62 @@
   width: 300px;
 }
 
-.modal button {
-  background-color: red;
+.modal button-con {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+#bookmark-btn {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(149, 0, 255);
+  width: 120px;
+  height: 40px;
+  color: #ffffff;
+  font-size: large;
+  font-weight: 900;
+  border-radius: 15px;
+  bottom: 20px;
+  left: 20px;
+}
+
+.bookmark-check {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+  bottom: 32px;
+  left: 140px;
+}
+
+
+.modal-content button[onclick="closeModal()"] {
+  position: absolute;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  background-color: red;
   width: 80px;
   height: 40px;
   font-size: large;
   font-weight: 900;
   border-radius: 15px;
   color: white;
+  bottom: 20px;
+  right: 20px;
+}
+
+#bookmark-btn:hover {
+  cursor: pointer;
+  color: #000;
+  background-color: rgb(198, 115, 13);
 }
 
 .modal button:hover {
