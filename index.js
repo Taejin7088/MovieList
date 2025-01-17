@@ -26,8 +26,6 @@ export const setHtmlTitle = (htmlTitle) => {
   document.getElementById('text-description').innerHTML = htmlTitle
 }
 
-
-
 //검색창에 입력값 들어오면 
 let timeOut = 0
 searchBar.addEventListener("input", function () {

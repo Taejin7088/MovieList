@@ -1,5 +1,5 @@
 import { lastPageNumber, PageNumber, setPageBtn } from '../components/pagination.js'
-import { goHome, searchBar } from '../index.js'
+import { goHome, searchBar, setHtmlTitle } from '../index.js'
 const movieCardList = document.getElementById("movie-card-list")
 
 const apiOptions = {
